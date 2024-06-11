@@ -1,0 +1,107 @@
+import tkinter as tk
+
+calculation ="" #string where the nos. will be entered
+
+def calculate(symbol): #func for  entry of nos. in the allotted text area
+    global calculation 
+    calculation += str(symbol) #append every entry onto the string
+    result.delete(1.0,"end") 
+    result.insert(1.0, calculation)
+
+def evaluation():  #func for evaluation of the expression
+    
+    global calculation
+
+    try:
+        calculation= str(eval(calculation))
+        result.delete(1.0, "end")
+        result.insert(1.0,calculation)
+        
+    except:
+        clear_string()
+        result.insert(1.0,"Error") #display of error for zero division scenarios
+
+def clear_string(): #func for deletion of entered expression
+    global calculation
+    calculation =""
+    result.delete(1.0,"end")
+
+root =tk.Tk()
+root.title("Calculator")
+root.geometry("300x275") #dimensions of the GUI window
+
+root.configure(bg="#d3d3d3")
+
+result= tk.Text(root, height=1, width=16, font=("Arial",24)) #dim. for text area
+result.grid(columnspan=5)
+
+#defined buttons for each no. and symbols:-
+
+btn1= tk.Button(root, text="1", command=lambda: calculate(1), width=5, font=("Arial",14), bg = "#D3D3D3",fg="black" )
+btn1.grid(row=2,column=1)
+
+btn2= tk.Button(root, text="2", command=lambda: calculate(2), width=5, font=("Arial",14) )
+btn2.grid(row=2,column=2)
+
+btn3= tk.Button(root, text="3", command=lambda: calculate(3), width=5, font=("Arial",14), bg = "#D3D3D3",fg="black"  )
+btn3.grid(row=2,column=3)
+
+btn4= tk.Button(root, text="4", command=lambda: calculate(4), width=5, font=("Arial",14) )
+btn4.grid(row=3,column=1)
+
+btn5= tk.Button(root, text="5", command=lambda: calculate(5), width=5, font=("Arial",14), bg = "#D3D3D3",fg="black" )
+btn5.grid(row=3,column=2)
+
+btn6= tk.Button(root, text="6", command=lambda: calculate(6), width=5, font=("Arial",14) )
+btn6.grid(row=3,column=3)
+
+btn7= tk.Button(root, text="7", command=lambda: calculate(7), width=5, font=("Arial",14), bg = "#D3D3D3",fg="black"  )
+btn7.grid(row=4,column=1)
+
+btn8= tk.Button(root, text="8", command=lambda: calculate(8), width=5, font=("Arial",14) )
+btn8.grid(row=4,column=2)
+
+btn9= tk.Button(root, text="9", command=lambda: calculate(9), width=5, font=("Arial",14), bg = "#D3D3D3",fg="black"  )
+btn9.grid(row=4,column=3)
+
+btn0= tk.Button(root, text="0", command=lambda: calculate(0), width=5, font=("Arial",14) , bg = "#D3D3D3",fg="black" )
+btn0.grid(row=5,column=2)
+
+
+
+#symbols
+
+btnplus= tk.Button(root, text="+", command=lambda: calculate("+"), width=5, font=("Arial",14),bg = "#D3D3D3",fg="black",activebackground="black",activeforeground="white" )
+btnplus.grid(row=5,column=4)
+
+btnminus= tk.Button(root, text="-", command=lambda: calculate("-"), width=5, font=("Arial",14) , bg = "#D3D3D3",fg="black",activebackground="black",activeforeground="white" )
+btnminus.grid(row=3,column=4)
+
+btninto= tk.Button(root, text="x", command=lambda: calculate("*"), width=5, font=("Arial",14),activebackground="black",activeforeground="white" )
+btninto.grid(row=4,column=4)
+
+btndivide= tk.Button(root, text="/", command=lambda: calculate("/"), width=5, font=("Arial",14),activebackground="black",activeforeground="white" )
+btndivide.grid(row=2,column=4)
+
+btn1stpara= tk.Button(root, text="(", command=lambda: calculate("("), width=5, font=("Arial",14),activebackground="black",activeforeground="white" )
+btn1stpara.grid(row=5,column=1)
+
+btn2ndpara= tk.Button(root, text=")", command=lambda: calculate(")"), width=5, font=("Arial",14),activebackground="black",activeforeground="white" )
+btn2ndpara.grid(row=5,column=3)
+
+btnequal= tk.Button(root, text="=", command= evaluation, width=11, font=("Arial",14),activebackground="black",activeforeground="white" )
+btnequal.grid(row=6,column=3,columnspan=2)
+
+btnclear= tk.Button(root, text="Clear", command=clear_string, width=11, font=("Arial",14),activebackground="black",activeforeground="white" )
+btnclear.grid(row=6,column=1,columnspan=2)
+
+
+
+
+
+
+
+
+
+root.mainloop()
+#end
